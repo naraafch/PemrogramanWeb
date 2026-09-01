@@ -127,12 +127,17 @@ td button {
     font-size: 0.85rem;
 }
 
-td button:first-of-type {
+td button.btn-warning {
     background-color: #f0ad4e;
     color: #fff;
 }
 
-td button:last-of-type {
+td button.btn-info {
+    background-color: #290ebc;
+    color: #fff;
+}
+
+td button.btn-danger {
     background-color: #d9534f;
     color: #fff;
 }
