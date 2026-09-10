@@ -201,7 +201,7 @@ footer {
 /* ===== Responsive Breakpoints ===== */
 
 /* Tablet ke bawah */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     main section:nth-of-type(2) {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -240,5 +240,32 @@ footer {
     form input,
     form select {
         max-width: 100%;
+    }
+
+    /* Wide Screen Monitor */
+    @media (min-width: 1400px) {
+        main {
+            max-width: 1300px;
+        }
+    }
+
+    /* Menangani blok kode agar bisa di-scroll horizontal pada HP */
+    pre {
+        overflow-x: auto;
+        white-space: pre;
+        max-width: 100%;
+    }
+
+    /* Mobile-first: gaya dasar untuk layar kecil */
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 481px) {
+        main section:nth-of-type(2) { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (min-width: 769px) {
+        main section:nth-of-type(2) { grid-template-columns: repeat(3, 1fr); }
     }
 }
