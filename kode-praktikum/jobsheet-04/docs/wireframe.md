@@ -102,3 +102,27 @@ Halaman yang sudah ada (Beranda, Daftar/Tambah Buku, Daftar/Tambah Anggota — J
 - Warna aksen, tipografi navbar, dan gaya tabel/kartu mengikuti `assets/css/style.css` yang sudah dibangun sejak Jobsheet 2-3.
 - Navbar akan ditambah menu **Peminjaman** dan indikator status login (nama petugas / tombol Logout) mulai implementasi di Jobsheet 10.
 - Edge case yang perlu ditangani saat implementasi: buku stok habis tidak boleh dipilih di form peminjaman; anggota dengan tunggakan terlambat divalidasi di Jobsheet 12 (tugas mandiri).
+
+## Wireframe: Registrasi Anggota Baru
++--------------------------------------------------+
+| SIMPUS-Mini                                      |
+|--------------------------------------------------|
+|                                                  |
+| [ Pendaftaran Anggota Baru ]                     |
+|                                                  |
+| NISN / NIK   : [______________________________]  |
+| Nama Lengkap : [______________________________]  |
+| Email        : [______________________________]  |
+| Nomor HP     : [______________________________]  |
+| Alamat       : [______________________________]  |
+|                                                  |
+|                   [ Daftar ]                     |
+|                                                  |
++--------------------------------------------------+
+
+## User Flow:  mencari anggota yang tunggakannya sudah lewat jatuh tempo
+[Petugas Login] -> [Dashboard] -> [Pilih Menu "Riwayat / Transaksi"] 
+  -> [Filter Status: "Terlambat / Bertunggakan"] -> [Sistem Menampilkan Daftar Anggota & Denda] 
+  -> [Petugas Memilih Anggota] -> [Cetak / Kirim Peringatan]
+
+##
