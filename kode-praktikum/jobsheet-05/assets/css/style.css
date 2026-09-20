@@ -237,14 +237,16 @@ footer {
     }
 
     header nav {
-        display: none;
-        width: 100%;
-        order: 3;
-        margin-top: 1rem;
+        display: block;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-heigth 0.4s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     header nav.nav-open {
-        display: block;
+        max-height: 300px;
+        opacity: 1;
     }
 
     header nav ul {

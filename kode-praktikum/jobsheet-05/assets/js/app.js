@@ -33,8 +33,11 @@ function initTableFilter() {
         const keyword = input.value.toLowerCase();
         const rows = table.querySelectorAll("tbody tr");
         rows.forEach(function (row) {
-            const teks = row.textContent.toLowerCase();
-            row.style.display = teks.includes(keyword) ? "" : "none";
+            const tdJudul = row.querySelector("td");
+            if (tdJudul) {
+                const teksJudul = tdJudul.textContent.toLowerCase();
+                row.computedStyleMap.display = teksJudul.includes(keyword) ? "" : "none";
+            }
         });
     });
 }
@@ -97,6 +100,17 @@ function initValidasiForm() {
                 valid = false;
             } else {
                 hapusError(stok);
+            }
+        }
+
+        const isbn = form.querySelector("[name='isbn']");
+        if (isbn && isbn.value.trim() !== "") {
+            const isbnPattern = /^[0-9-]+$/;
+            if (!isbnPattern.test(isbn.value.trim())) {
+                tampilkanError(isbn, "ISBN hanya boleh berisi angka dan tanda hubung (-).");
+                valid = false;
+            } else {
+                hapusError(isbn);
             }
         }
 
