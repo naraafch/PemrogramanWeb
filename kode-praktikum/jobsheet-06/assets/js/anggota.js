@@ -1,40 +1,46 @@
 // Mengambil & menampilkan Daftar Anggota secara asinkron dari data/anggota.json
-async function muatDaftarAnggota() {
+async function muatDaftarAnggota(urlJson, keys) {
     const tbody = document.querySelector(".table-responsive table tbody");
     const loading = document.getElementById("loading-indicator");
     if (!tbody) return;
 
-    loading.style.display = "block";
+    if (loading) loading.style.display = "block";
     tbody.innerHTML = "";
 
     try {
         await new Promise((resolve) => setTimeout(resolve, 600));
 
-        const res = await fetch("../data/anggota.json");
+        const res = await fetch(urlJson);
         if (!res.ok) {
             throw new Error("Gagal mengambil data (status " + res.status + ")");
         }
-        const daftarAnggota = await res.json();
+        const dataList = await res.json();
 
-        daftarAnggota.forEach(function (anggota) {
+        dataList.forEach(function (item) {
             const tr = document.createElement("tr");
-            tr.innerHTML =
-                "<td>" + anggota.no_anggota + "</td>" +
-                "<td>" + anggota.nama + "</td>" +
-                "<td>" + anggota.alamat + "</td>" +
-                "<td>" + anggota.no_hp + "</td>" +
-                "<td>" +
-                "<button type=\"button\">Edit</button> " +
-                "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
-                "</td>";
+            let cellContent = "";
+            keys.forEach(function (key) {
+                cellContent += "<td>" + (item[key] !== undefined ? item[key] : "") + "</td?";
+            });
+
+            cellContent += `
+                <td>
+                    <button type="button" class="btn-edit">Edit</button>
+                    <button type="button" class="btn-hapus">Hapus</button>
+                </td>`;
+
+            tr.innerHTML = cellContent;
             tbody.appendChild(tr);
+            
         });
     } catch (err) {
-        tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " + err.message + "</td></tr>";
+        tbody.innerHTML = 
+            `<tr><td colspan="${keys.length + 1}">Gagal memuat data: ${err.message}</td></tr>`;
     } finally {
-        loading.style.display = "none";
+        if (loading) loading.style.display = "none";
     }
 }
 
-document.addEventListener("DOMContentLoaded", muatDaftarAnggota);
+document.addEventListener("DOMContentLoaded", function() {
+    muatDataTabel("../data/anggota.json", ["no_anggota", "nama", "alamat", "no_hp"]);
+});
