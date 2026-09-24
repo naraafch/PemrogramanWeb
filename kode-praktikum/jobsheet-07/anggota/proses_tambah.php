@@ -24,6 +24,20 @@ if (!isset($_SESSION['anggota'])) {
     $_SESSION['anggota'] = [];
 }
 
+if ($noHp !== '' && !preg_match('/^[0-9+]+$/', $noHp)) {
+    $errors[] = "No. HP hanya boleh berisi angka atau tanda +.";
+}
+
+if (!empty($errors)) {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
+    header('Location: tambah.php');
+    exit;
+}
+
+if (!isset($_SESSION['anggota'])) {
+    $_SESSION['anggota'] = [];
+}
+
 $_SESSION['anggota'][] = [
     'nama' => $nama,
     'no_anggota' => $noAnggota,
